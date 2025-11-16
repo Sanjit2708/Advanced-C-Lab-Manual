@@ -12,10 +12,50 @@ Algorithm:
 5.	Call the max_of_four function with the input integers and store the result in the greater variable
  
 Program:
-//type your code here
+```#include <stdio.h>
+
+// Function to find the greatest number among four integers
+int max_of_four(int n1, int n2, int n3, int n4) {
+    int max;
+
+    if (n1 >= n2 && n1 >= n3 && n1 >= n4) {
+        max = n1;
+    }
+    else if (n2 >= n1 && n2 >= n3 && n2 >= n4) {
+        max = n2;
+    }
+    else if (n3 >= n1 && n3 >= n2 && n3 >= n4) {
+        max = n3;
+    }
+    else {
+        max = n4;
+    }
+
+    return max;
+}
+
+int main() {
+    int n1, n2, n3, n4, greater;
+
+    // Taking four integers as input
+    printf("Enter four integers: ");
+    scanf("%d %d %d %d", &n1, &n2, &n3, &n4);
+
+    // Call the function and store the result
+    greater = max_of_four(n1, n2, n3, n4);
+
+    // Display the result
+    printf("The greatest number among %d, %d, %d, and %d is: %d\n", n1, n2, n3, n4, greater);
+
+    return 0;
+}
+
+```
 
 Output:
-//paste your output here
+
+<img width="491" height="243" alt="513666556-749635e3-f0a6-45fe-a544-347328d4fd95" src="https://github.com/user-attachments/assets/8ea9bcd8-db02-43cf-86c0-d65e15d46182" />
+
 
 Result:
 Thus, the program  that create a function to find the greatest number is verified successfully.
@@ -36,10 +76,56 @@ Algorithm:
 7.	Call the calculate_the_max function with input values.
  
 Program:
-//type your code here
+```
+#include <stdio.h>
+
+// Function to calculate maximum values for AND, OR, and XOR
+void calculate_the_max(int n, int k) {
+    int a = 0, o = 0, x = 0;  // Variables to store maximum values
+
+    // Nested loops to iterate through pairs (i, j)
+    for (int i = 1; i <= n; i++) {
+        for (int j = i + 1; j <= n; j++) {
+            int and_val = i & j;
+            int or_val  = i | j;
+            int xor_val = i ^ j;
+
+            // Update maximum values if within limit k
+            if (and_val > a && and_val < k) {
+                a = and_val;
+            }
+            if (or_val > o && or_val < k) {
+                o = or_val;
+            }
+            if (xor_val > x && xor_val < k) {
+                x = xor_val;
+            }
+        }
+    }
+
+    // Print the results
+    printf("Maximum AND value less than %d: %d\n", k, a);
+    printf("Maximum OR value less than %d: %d\n", k, o);
+    printf("Maximum XOR value less than %d: %d\n", k, x);
+}
+
+int main() {
+    int n, k;
+
+    // Take user input
+    printf("Enter two integers (n and k): ");
+    scanf("%d %d", &n, &k);
+
+    // Call the function
+    calculate_the_max(n, k);
+
+    return 0;
+}
+```
 
 Output:
-//paste your output here
+
+<img width="454" height="248" alt="513666958-2d1a964a-a44d-44c0-988b-d3b37d5b60fb" src="https://github.com/user-attachments/assets/fa22b995-9977-4b5c-9f67-bf04966413ac" />
 
 Result:
 Thus, the program to print the maximum values for the AND, OR and XOR comparisons
@@ -59,10 +145,69 @@ Algorithm:
 5.	Use a for loop to iterate over the queries.
  
 Program:
-//type your code here
+```
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int noshel, noque;   // number of shelves and queries
+    scanf("%d %d", &noshel, &noque);
+
+    // 2D array to represent shelves and books
+    int **shelarr = (int **)malloc(noshel * sizeof(int *));
+    int *nobookarr = (int *)malloc(noshel * sizeof(int));
+
+    // Initialize shelves with zero books
+    for (int i = 0; i < noshel; i++) {
+        shelarr[i] = NULL;
+        nobookarr[i] = 0;
+    }
+
+    int k, c;  // variables for book index and total number of books
+
+    // Process queries
+    for (int q = 0; q < noque; q++) {
+        int type;
+        scanf("%d", &type);
+
+        if (type == 1) {
+            // Query type 1: Add a book to a shelf
+            int shelf, pages;
+            scanf("%d %d", &shelf, &pages);
+
+            nobookarr[shelf]++;  // increase book count
+            shelarr[shelf] = (int *)realloc(shelarr[shelf], nobookarr[shelf] * sizeof(int));
+            shelarr[shelf][nobookarr[shelf] - 1] = pages;  // store book pages
+        }
+        else if (type == 2) {
+            // Query type 2: Print number of pages in a book
+            int shelf, book;
+            scanf("%d %d", &shelf, &book);
+            printf("%d\n", shelarr[shelf][book]);
+        }
+        else if (type == 3) {
+            // Query type 3: Print number of books on a shelf
+            int shelf;
+            scanf("%d", &shelf);
+            printf("%d\n", nobookarr[shelf]);
+        }
+    }
+
+    // Free allocated memory
+    for (int i = 0; i < noshel; i++) {
+        free(shelarr[i]);
+    }
+    free(shelarr);
+    free(nobookarr);
+
+    return 0;
+}
+
+```
 
 Output:
-//paste your output here
+<img width="480" height="553" alt="513667779-14b923c3-8687-417b-8a2d-2606b0b9d8f6" src="https://github.com/user-attachments/assets/7fe6f210-8e05-4176-97c2-725caa02f095" />
+
 
 
 Result:
@@ -86,10 +231,32 @@ Algorithm:
 
 
 Program:
-//type your code here
+```
+#include <stdio.h>
+
+int main() {
+    int n;              // Step 1: Declare variable n
+    scanf("%d", &n);    // Step 2: Input n
+    
+    int a[n];           // Step 3: Declare array of size n
+    int sum = 0;        // Step 4: Initialize sum to 0
+    
+    // Step 5: Loop n times
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &a[i]);   // Step 6: Input each integer
+        sum += a[i];          // Add to sum
+    }
+    
+    printf("%d\n", sum);      // Step 7: Print final sum
+    
+    return 0;
+}
+
+```
 
 Output:
-//paste your output here
+
+<img width="453" height="240" alt="513673316-2e3ea956-9061-4834-aafd-2cc7303f91e5" src="https://github.com/user-attachments/assets/e97fcccb-cca7-4a24-9ff5-c315839570eb" />
 
  
 
@@ -99,7 +266,7 @@ Thus, the program prints the sum of the integers in the array is verified succes
 
 
  
-EXP NO 25: C PROGRAM TO COUNT THE NUMBER OF WORDS IN A      SENTENCE
+EXP NO 25: C PROGRAM TO COUNT THE NUMBER OF WORDS IN A SENTENCE
 
 
 
@@ -120,10 +287,45 @@ o	If a character is not a space, it may belong to a word. If it's the first non-
 
 
 Program:
-//type your code here
+```
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+int main() {
+    char sentence[1000];   // Step 1: Input sentence
+    int count = 0;         // Step 2: Initialize counter
+    int inWord = 0;        // Flag to track if we are inside a word
+
+    // Prompt and input
+    printf("Enter a sentence: ");
+    fgets(sentence, sizeof(sentence), stdin);
+
+    // Step 3: Process each character
+    for (int i = 0; sentence[i] != '\0'; i++) {
+        if (!isspace(sentence[i]) && !ispunct(sentence[i])) {
+            // Non-space, non-punctuation character
+            if (inWord == 0) {
+                count++;       // New word starts
+                inWord = 1;    // We are inside a word
+            }
+        } else {
+            // Space or punctuation ends the word
+            inWord = 0;
+        }
+    }
+
+    // Step 5: Display result
+    printf("Number of words: %d\n", count);
+
+    return 0;
+}
+
+```
 
 Output:
-//paste your output here
+
+<img width="596" height="238" alt="513673612-6d55d1c0-9b25-4cbc-8132-d66c9f5e6bb0" src="https://github.com/user-attachments/assets/aa154f42-d32f-4e5e-9f09-075cab373477" />
 
 
 
